@@ -1,6 +1,8 @@
 using LatticeGeometry
 using Test
 
+include("geometry/hypercubic.jl")
+
 @testset "LatticeGeometry.jl" begin
-    # Write your tests here.
+    test_hypercubic()
 end
