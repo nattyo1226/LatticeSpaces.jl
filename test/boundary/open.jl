@@ -1,5 +1,5 @@
 function test_open_boundary()
-    boundary = OpenBoundary()
-    periodic = is_periodic(boundary, 2)
+    boundary = OpenBoundary{2}()
+    periodic = is_periodic(boundary)
     @test periodic == (false, false)
 end
