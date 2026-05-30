@@ -9,7 +9,7 @@ function Base.size(g::Hypercubic)
 end
 
 function coord(g::Hypercubic{D}, i::Int) where D
-    return ntuple(d -> (i - 1) ÷ prod(g.size[(d+1):end]) % g.size[d] + 1, D)
+    return ntuple(d -> (i - 1) ÷ prod(g.size[(d+1):end]) % g.size[d] + 1, Val(D))
 end
 
 function id(g::Hypercubic{D}, c::NTuple{D,Int}) where D
@@ -20,8 +20,8 @@ function neighbor_offsets(::Hypercubic{D}, shell::Int=1) where D
     offsets = Vector{NTuple{D,Int}}()
     if shell == 1
         for d in 1:D
-            push!(offsets, ntuple(i -> i == d ? 1 : 0, D))
-            push!(offsets, ntuple(i -> i == d ? -1 : 0, D))
+            push!(offsets, ntuple(i -> i == d ? 1 : 0, Val(D)))
+            push!(offsets, ntuple(i -> i == d ? -1 : 0, Val(D)))
         end
     else
         throw(ArgumentError("Only nearest neighbors (shell=1) are supported for Hypercubic geometry"))
