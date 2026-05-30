@@ -2,22 +2,22 @@ struct Hypercubic{D} <: AbstractGeometry{D}
     size::NTuple{D,Int64}
 end
 
-Hypercubic(sizes::Int64...) = Hypercubic{length(sizes)}(sizes)
+Hypercubic(sizes::Int...) = Hypercubic{length(sizes)}(sizes)
 
 function Base.size(g::Hypercubic)
     return g.size
 end
 
-function coord(g::Hypercubic{D}, i::Int64) where D
-    return ntuple(d -> (i - 1) ÷ prod(g.size[d+1:end]) % g.size[d] + 1, D)
+function coord(g::Hypercubic{D}, i::Int) where D
+    return ntuple(d -> (i - 1) ÷ prod(g.size[(d+1):end]) % g.size[d] + 1, D)
 end
 
-function id(g::Hypercubic{D}, c::NTuple{D,Int64}) where D
-    return 1 + sum((c[d] - 1) * prod(g.size[d+1:end]) for d in 1:D)
+function id(g::Hypercubic{D}, c::NTuple{D,Int}) where D
+    return 1 + sum((c[d] - 1) * prod(g.size[(d+1):end]) for d in 1:D)
 end
 
-function neighbor_offsets(::Hypercubic{D}, order::Int64=1) where D
-    offsets = Vector{NTuple{D,Int64}}()
+function neighbor_offsets(::Hypercubic{D}, order::Int=1) where D
+    offsets = Vector{NTuple{D,Int}}()
     if order == 1
         for d in 1:D
             push!(offsets, ntuple(i -> i == d ? 1 : 0, D))

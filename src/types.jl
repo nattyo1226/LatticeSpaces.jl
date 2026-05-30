@@ -29,15 +29,15 @@ function nsites(lattice::Lattice)
     return nsites(lattice.geometry)
 end
 
-function coord(lattice::Lattice, site_id::Int64)
+function coord(lattice::Lattice, site_id::Int)
     return coord(lattice.geometry, site_id)
 end
 
-function id(lattice::Lattice{D}, site_c::NTuple{D,Int64}) where {D}
+function id(lattice::Lattice{D}, site_c::NTuple{D,Int}) where {D}
     return id(lattice.geometry, site_c)
 end
 
-function neighbors(lattice::Lattice, site_id::Int64, order::Int64=1)
+function neighbors(lattice::Lattice, site_id::Int, order::Int=1)
     return neighbors(lattice.geometry, lattice.periodic, site_id, order)
 end
 

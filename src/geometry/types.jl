@@ -12,21 +12,21 @@ function nsites(g::AbstractGeometry)
     return prod(size(g))
 end
 
-function coord(g::AbstractGeometry, ::Int64)
+function coord(g::AbstractGeometry, ::Int)
     error("coord is not implemented for $(typeof(g))")
 end
 
-function id(g::AbstractGeometry, ::NTuple{D,Int64}) where D
+function id(g::AbstractGeometry, ::NTuple{D,Int}) where D
     error("site is not implemented for $(typeof(g))")
 end
 
-function neighbor_offsets(g::AbstractGeometry, ::Int64)
+function neighbor_offsets(g::AbstractGeometry, ::Int)
     error("neighbor_offsets is not implemented for $(typeof(g))")
 end
 
-function neighbors(g::AbstractGeometry, periodic::NTuple{D,Bool}, site_id::Int64, order::Int64=1) where D
+function neighbors(g::AbstractGeometry, periodic::NTuple{D,Bool}, site_id::Int, order::Int=1) where D
     c = coord(g, site_id)
-    neighbor_ids = Int64[]
+    neighbor_ids = Int[]
     size_g = size(g)
 
     offsets = neighbor_offsets(g, order)
@@ -45,7 +45,7 @@ function neighbors(g::AbstractGeometry, periodic::NTuple{D,Bool}, site_id::Int64
 end
 
 function neighbor_pairs(g::AbstractGeometry, periodic::NTuple{D,Bool}) where D
-    pairs = Tuple{Int64,Int64}[]
+    pairs = Tuple{Int,Int}[]
     for site_id in 1:nsites(g)
         neighbor_ids = neighbors(g, periodic, site_id)
         for neighbor_id in neighbor_ids
