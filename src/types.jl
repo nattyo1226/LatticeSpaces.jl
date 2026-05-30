@@ -41,8 +41,8 @@ function neighbors(lattice::Lattice, site_id::Int, shell::Int=1)
     return neighbors(lattice.geometry, lattice.periodic, site_id, shell)
 end
 
-function neighbor_pairs(lattice::Lattice)
-    return neighbor_pairs(lattice.geometry, lattice.periodic)
+function neighbor_pairs(lattice::Lattice, shell::Int=1)
+    return neighbor_pairs(lattice.geometry, lattice.periodic, shell)
 end
 
 function is_periodic(lattice::Lattice)

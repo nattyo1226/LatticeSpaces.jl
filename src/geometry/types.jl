@@ -44,10 +44,10 @@ function neighbors(g::AbstractGeometry, periodic::NTuple{D,Bool}, site_id::Int, 
     return sort(neighbor_ids)
 end
 
-function neighbor_pairs(g::AbstractGeometry, periodic::NTuple{D,Bool}) where D
+function neighbor_pairs(g::AbstractGeometry, periodic::NTuple{D,Bool}, shell::Int=1) where D
     pairs = Tuple{Int,Int}[]
     for site_id in 1:nsites(g)
-        neighbor_ids = neighbors(g, periodic, site_id)
+        neighbor_ids = neighbors(g, periodic, site_id, shell)
         for neighbor_id in neighbor_ids
             if site_id < neighbor_id
                 push!(pairs, (site_id, neighbor_id))
