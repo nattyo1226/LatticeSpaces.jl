@@ -16,15 +16,15 @@ function id(g::Hypercubic{D}, c::NTuple{D,Int}) where D
     return 1 + sum((c[d] - 1) * prod(g.size[(d+1):end]) for d in 1:D)
 end
 
-function neighbor_offsets(::Hypercubic{D}, order::Int=1) where D
+function neighbor_offsets(::Hypercubic{D}, shell::Int=1) where D
     offsets = Vector{NTuple{D,Int}}()
-    if order == 1
+    if shell == 1
         for d in 1:D
             push!(offsets, ntuple(i -> i == d ? 1 : 0, D))
             push!(offsets, ntuple(i -> i == d ? -1 : 0, D))
         end
     else
-        throw(ArgumentError("Only nearest neighbors (order=1) are supported for Hypercubic geometry"))
+        throw(ArgumentError("Only nearest neighbors (shell=1) are supported for Hypercubic geometry"))
     end
     return offsets
 end

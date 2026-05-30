@@ -37,8 +37,8 @@ function id(lattice::Lattice{D}, site_c::NTuple{D,Int}) where {D}
     return id(lattice.geometry, site_c)
 end
 
-function neighbors(lattice::Lattice, site_id::Int, order::Int=1)
-    return neighbors(lattice.geometry, lattice.periodic, site_id, order)
+function neighbors(lattice::Lattice, site_id::Int, shell::Int=1)
+    return neighbors(lattice.geometry, lattice.periodic, site_id, shell)
 end
 
 function neighbor_pairs(lattice::Lattice)

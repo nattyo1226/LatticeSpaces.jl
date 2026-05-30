@@ -24,12 +24,12 @@ function neighbor_offsets(g::AbstractGeometry, ::Int)
     error("neighbor_offsets is not implemented for $(typeof(g))")
 end
 
-function neighbors(g::AbstractGeometry, periodic::NTuple{D,Bool}, site_id::Int, order::Int=1) where D
+function neighbors(g::AbstractGeometry, periodic::NTuple{D,Bool}, site_id::Int, shell::Int=1) where D
     c = coord(g, site_id)
     neighbor_ids = Int[]
     size_g = size(g)
 
-    offsets = neighbor_offsets(g, order)
+    offsets = neighbor_offsets(g, shell)
     for offset in offsets
         neighbor_c = ntuple(D) do i
             val = c[i] + offset[i]
