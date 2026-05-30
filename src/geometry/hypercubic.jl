@@ -1,19 +1,11 @@
-struct Hypercubic{D} <: AbstractGeometry
+struct Hypercubic{D} <: AbstractGeometry{D}
     size::NTuple{D,Int64}
 end
 
 Hypercubic(sizes::Int64...) = Hypercubic{length(sizes)}(sizes)
 
-function Base.ndims(::Hypercubic{D}) where D
-    return D
-end
-
 function Base.size(g::Hypercubic)
     return g.size
-end
-
-function nsites(g::Hypercubic)
-    return prod(g.size)
 end
 
 function coord(g::Hypercubic{D}, i::Int64) where D

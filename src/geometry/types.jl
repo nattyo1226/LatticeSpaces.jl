@@ -1,7 +1,7 @@
-abstract type AbstractGeometry end
+abstract type AbstractGeometry{D} end
 
-function Base.ndims(g::AbstractGeometry)
-    error("ndims is not implemented for $(typeof(g))")
+function Base.ndims(::AbstractGeometry{D}) where D
+    return D
 end
 
 function Base.size(g::AbstractGeometry)
@@ -9,7 +9,7 @@ function Base.size(g::AbstractGeometry)
 end
 
 function nsites(g::AbstractGeometry)
-    error("nsites is not implemented for $(typeof(g))")
+    return prod(size(g))
 end
 
 function coord(g::AbstractGeometry, ::Int64)
