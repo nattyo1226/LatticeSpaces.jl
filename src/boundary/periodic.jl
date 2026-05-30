@@ -1,5 +1,5 @@
-struct PeriodicBoundary{D} <: AbstractBoundary where D end
+struct PeriodicBoundary <: AbstractBoundary end
 
-function is_periodic(::PeriodicBoundary{D}) where D
-    return ntuple(_ -> true, D)
+function is_periodic(::PeriodicBoundary, dim::Int64)
+    return ntuple(_ -> true, dim)
 end
