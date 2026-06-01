@@ -11,10 +11,10 @@ end
 Base.show(io::IO, lattice::Lattice{D,G}) where {D,G<:AbstractGeometry} = print(io, "Lattice{$(D)}(geometry=$(G), periodic=$(lattice.periodic))")
 function Base.show(io::IO, ::MIME"text/plain", lattice::Lattice{D,G}) where {D,G<:AbstractGeometry}
     @printf io "Lattice:\n"
-    @printf io "\tgeometry:   %s\n" string(G)
-    @printf io "\tdimensions: %d\n" D
-    @printf io "\tsize:       %s\n" string(size(lattice))
-    @printf io "\tperiodic:   %s\n" string(lattice.periodic)
+    @printf io "geometry:   %s\n" string(G)
+    @printf io "dimensions: %d\n" D
+    @printf io "size:       %s\n" string(size(lattice))
+    @printf io "periodic:   %s\n" string(lattice.periodic)
 end
 
 function Base.ndims(lattice::Lattice)
