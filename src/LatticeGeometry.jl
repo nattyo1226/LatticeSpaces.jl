@@ -6,7 +6,7 @@ include("geometry/Geometry.jl")
 using .Geometry
 import .Geometry: nsites, coord, id, neighbors, neighbor_pairs
 export AbstractGeometry
-export Hypercubic
+export Hypercubic, AllToAll
 
 include("boundary/Boundary.jl")
 using .Boundary

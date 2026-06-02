@@ -8,4 +8,7 @@ export AbstractGeometry, nsites, coord, id, neighbor_offsets, neighbors, neighbo
 include("hypercubic.jl")
 export Hypercubic
 
+include("all_to_all.jl")
+export AllToAll
+
 end
