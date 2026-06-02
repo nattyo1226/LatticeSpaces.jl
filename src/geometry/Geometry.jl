@@ -1,9 +1,9 @@
 module Geometry
 
-using Base: ndims, size
+using Printf
 
 include("types.jl")
-export AbstractGeometry, ndims, size, nsites, coord, id, neighbor_offsets, neighbors, neighbor_pairs
+export AbstractGeometry, nsites, coord, id, neighbor_offsets, neighbors, neighbor_pairs
 
 include("hypercubic.jl")
 export Hypercubic

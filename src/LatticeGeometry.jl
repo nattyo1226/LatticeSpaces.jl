@@ -1,11 +1,10 @@
 module LatticeGeometry
 
-using Base: ndims, size
 using Printf
 
 include("geometry/Geometry.jl")
 using .Geometry
-import .Geometry: ndims, size, nsites, coord, id, neighbor_offsets, neighbors, neighbor_pairs
+import .Geometry: nsites, coord, id, neighbors, neighbor_pairs
 export AbstractGeometry
 export Hypercubic
 
@@ -16,6 +15,6 @@ export AbstractBoundary
 export OpenBoundary, PeriodicBoundary
 
 include("types.jl")
-export Lattice, ndims, size, nsites, coord, id, neighbors, neighbor_pairs, is_periodic
+export Lattice, nsites, coord, id, neighbors, neighbor_pairs, is_periodic
 
 end
