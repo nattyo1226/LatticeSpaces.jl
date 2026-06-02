@@ -4,6 +4,16 @@ end
 
 Hypercubic(sizes::Int...) = Hypercubic{length(sizes)}(sizes)
 
+function Base.show(io::IO, g::Hypercubic{D}) where D
+    print(io, "Hypercubic{D=$(D)}(size=$(g.size))")
+end
+
+function Base.show(io::IO, ::MIME"text/plain", g::Hypercubic{D}) where D
+    @printf io "[Hypercubic Geometry]:\n"
+    @printf io "dimensions: %d\n" D
+    @printf io "size      : %s\n" string(g.size)
+end
+
 function Base.size(g::Hypercubic)
     return g.size
 end

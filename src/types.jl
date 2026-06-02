@@ -11,9 +11,7 @@ end
 Base.show(io::IO, lattice::Lattice{D,G}) where {D,G<:AbstractGeometry} = print(io, "Lattice{$(D)}(geometry=$(G), periodic=$(lattice.periodic))")
 function Base.show(io::IO, ::MIME"text/plain", lattice::Lattice{D,G}) where {D,G<:AbstractGeometry}
     @printf io "Lattice:\n"
-    @printf io "geometry:   %s\n" string(G)
-    @printf io "dimensions: %d\n" D
-    @printf io "size:       %s\n" string(size(lattice))
+    @printf io "geometry:   %s\n" lattice.geometry
     @printf io "periodic:   %s\n" string(lattice.periodic)
 end
 
