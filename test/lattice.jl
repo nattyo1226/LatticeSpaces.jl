@@ -28,3 +28,7 @@ function test_lattice()
     ]
     @test is_periodic(lattice) == (false, false)
 end
+
+@testset "Lattice" begin
+    test_lattice()
+end
