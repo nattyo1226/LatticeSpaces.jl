@@ -1,4 +1,4 @@
-module LatticeGeometry
+module LatticeSpace
 
 using Printf
 
