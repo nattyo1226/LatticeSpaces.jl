@@ -3,7 +3,7 @@ struct Hypercubic{D} <: AbstractGeometry{D}
     periodic::NTuple{D,Bool}
 end
 
-function Hypercubic(size::NTuple{D,Int}, boundary::B) where {D,B<:AbstractGeometry{D}}
+function Hypercubic(size::NTuple{D,Int}, boundary::B) where {D,B<:AbstractBoundary{D}}
     p = periodic(boundary)
     return Hypercubic{D}(size, p)
 end
