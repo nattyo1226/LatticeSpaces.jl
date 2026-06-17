@@ -1,7 +1,7 @@
-module Boundary
+module Boundaries
 
-include("types.jl")
-export AbstractBoundary, is_periodic
+include("type.jl")
+export AbstractBoundary, periodic
 
 include("open.jl")
 export OpenBoundary

@@ -1,11 +1,10 @@
 function test_hypercubic_1()
-    g = Hypercubic(4, 4)
-    periodic = (true, true)
+    g = Hypercubic((4, 4), (true, true))
     site_id = 5
-    neighbor_ids = neighbors(g, periodic, site_id)
+    neighbor_ids = neighbors(g, site_id)
     @test neighbor_ids == [1, 6, 8, 9]
 
-    pairs = neighbor_pairs(g, periodic)
+    pairs = neighbor_pairs(g)
     @test pairs == [
         (1, 2), (1, 4), (1, 5), (1, 13),
         (2, 3), (2, 6), (2, 14),
@@ -26,13 +25,12 @@ function test_hypercubic_1()
 end
 
 function test_hypercubic_2()
-    g = Hypercubic(3, 3, 3)
-    periodic = (false, false, false)
+    g = Hypercubic((3, 3, 3), (false, false, false))
     site_id = 13
-    neighbor_ids = neighbors(g, periodic, site_id)
+    neighbor_ids = neighbors(g, site_id)
     @test neighbor_ids == [4, 10, 14, 16, 22]
 
-    pairs = neighbor_pairs(g, periodic)
+    pairs = neighbor_pairs(g)
     @test pairs == [
         (1, 2), (1, 4), (1, 10),
         (2, 3), (2, 5), (2, 11),

@@ -1,10 +1,8 @@
-using LatticeSpace
+using LatticeSpaces
 using Test
 
-@testset "LatticeSpace.jl" begin
-    include("geometry/hypercubic.jl")
-    include("geometry/all_to_all.jl")
-    include("boundary/open.jl")
-    include("boundary/periodic.jl")
-    include("lattice.jl")
-end
+include("boundaries/open.jl")
+include("boundaries/periodic.jl")
+include("geometries/hypercubic.jl")
+include("geometries/all_to_all.jl")
+include("spaces/space.jl")
