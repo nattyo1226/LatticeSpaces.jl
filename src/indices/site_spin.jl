@@ -27,6 +27,10 @@ function spin(id::SiteSpinIndex)
     return id.spin
 end
 
+function local_label(id::SiteSpinIndex)
+    return (id.spin,)
+end
+
 function to_tuple(id::SiteSpinIndex)
     return (id.site, id.spin)
 end

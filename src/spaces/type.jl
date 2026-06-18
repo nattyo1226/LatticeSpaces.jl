@@ -3,6 +3,10 @@ struct Space{T<:AbstractSystemTag,L<:AbstractLocalSpace{T},G<:AbstractGeometry}
     geometry::G
 end
 
+function nsites(s::Space)
+    return nsites(s.geometry)
+end
+
 function neighbors(s::Space{T}, id::I, shell::Int=1) where {T<:AbstractSystemTag,I<:AbstractIndex{T}}
     if I != index_type(s.local_space)
         throw(ArgumentError("Index type mismatch"))
@@ -20,6 +24,40 @@ function neighbors(s::Space{T}, id::I, shell::Int=1) where {T<:AbstractSystemTag
     return ns_with_labels
 end
 
+function neighbors_with_same_labels(s::Space{T}, id::I, shell::Int=1) where {T<:AbstractSystemTag,I<:AbstractIndex{T}}
+    if I != index_type(s.local_space)
+        throw(ArgumentError("Index type mismatch"))
+    end
+
+    ns = neighbors(s.geometry, site(id), shell)
+    labels = local_label(id)
+
+    ns_with_labels = [
+        I(site_n, labels...)
+        for site_n in ns
+    ]
+
+    return ns_with_labels
+end
+
+function neighbors_with_other_labels(s::Space{T}, id::I, shell::Int=1) where {T<:AbstractSystemTag,I<:AbstractIndex{T}}
+    if I != index_type(s.local_space)
+        throw(ArgumentError("Index type mismatch"))
+    end
+
+    ns = neighbors(s.geometry, site(id), shell)
+    ls = local_labels(s.local_space)
+
+    ns_with_labels = [
+        I(site_n, labels...)
+        for site_n in ns
+        for labels in ls
+        if labels != local_label(id)
+    ]
+
+    return ns_with_labels
+end
+
 function neighbor_pairs(s::Space{T}, shell::Int=1) where {T<:AbstractSystemTag}
     ps = neighbor_pairs(s.geometry, shell)
     ls = local_labels(s.local_space)
@@ -30,6 +68,38 @@ function neighbor_pairs(s::Space{T}, shell::Int=1) where {T<:AbstractSystemTag}
         for (site_p1, site_p2) in ps
         for labels1 in ls
         for labels2 in ls
+    ]
+
+    return ps_with_labels
+end
+
+function neighbor_pairs_with_same_labels(s::Space{T}, shell::Int=1) where {T<:AbstractSystemTag}
+    ps = neighbor_pairs(s.geometry, shell)
+    ls = local_labels(s.local_space)
+    I = index_type(s.local_space)
+
+    ps_with_labels = [
+        (I(site_p1, labels1...), I(site_p2, labels2...))
+        for (site_p1, site_p2) in ps
+        for labels1 in ls
+        for labels2 in ls
+        if labels1 == labels2
+    ]
+
+    return ps_with_labels
+end
+
+function neighbor_pairs_with_other_labels(s::Space{T}, shell::Int=1) where {T<:AbstractSystemTag}
+    ps = neighbor_pairs(s.geometry, shell)
+    ls = local_labels(s.local_space)
+    I = index_type(s.local_space)
+
+    ps_with_labels = [
+        (I(site_p1, labels1...), I(site_p2, labels2...))
+        for (site_p1, site_p2) in ps
+        for labels1 in ls
+        for labels2 in ls
+        if labels1 != labels2
     ]
 
     return ps_with_labels
@@ -54,12 +124,33 @@ function tag_type(::Space{T}) where T
 end
 
 function indices(s::Space{T}) where {T<:AbstractSystemTag}
+    num_sites = nsites(s.geometry)
     ls = local_labels(s.local_space)
     I = index_type(s.local_space)
 
     return [
         I(site, labels...)
-        for site in 1:nsites(s.geometry)
+        for site in 1:num_sites
         for labels in ls
+    ]
+end
+
+function indices_with_fixed_site(s::Space{T}, site::Int) where {T<:AbstractSystemTag}
+    ls = local_labels(s.local_space)
+    I = index_type(s.local_space)
+
+    return [
+        I(site, labels...)
+        for labels in ls
+    ]
+end
+
+function indices_with_fixed_labels(s::Space{T}, labels::Tuple) where {T<:AbstractSystemTag}
+    num_sites = nsites(s.geometry)
+    I = index_type(s.local_space)
+
+    return [
+        I(site, labels...)
+        for site in 1:num_sites
     ]
 end

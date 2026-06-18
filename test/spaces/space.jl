@@ -28,6 +28,15 @@ function test_space_1()
         SiteIndex{T}(3),
         SiteIndex{T}(4),
     ]
+    @test indices_with_fixed_site(space, 2) == [
+        SiteIndex{T}(2),
+    ]
+    @test indices_with_fixed_labels(space, ()) == [
+        SiteIndex{T}(1),
+        SiteIndex{T}(2),
+        SiteIndex{T}(3),
+        SiteIndex{T}(4),
+    ]
 end
 
 function test_space_2()
@@ -41,6 +50,14 @@ function test_space_2()
         SiteSpinIndex(1, Up),
         SiteSpinIndex(1, Down),
         SiteSpinIndex(3, Up),
+        SiteSpinIndex(3, Down),
+    ]
+    @test neighbors_with_same_labels(space, id) == [
+        SiteSpinIndex(1, Up),
+        SiteSpinIndex(3, Up),
+    ]
+    @test neighbors_with_other_labels(space, id) == [
+        SiteSpinIndex(1, Down),
         SiteSpinIndex(3, Down),
     ]
     @test neighbor_pairs(space) == [
@@ -61,6 +78,26 @@ function test_space_2()
         (SiteSpinIndex(3, Down), SiteSpinIndex(4, Up)),
         (SiteSpinIndex(3, Down), SiteSpinIndex(4, Down)),
     ]
+    @test neighbor_pairs_with_same_labels(space) == [
+        (SiteSpinIndex(1, Up), SiteSpinIndex(2, Up)),
+        (SiteSpinIndex(1, Down), SiteSpinIndex(2, Down)),
+        (SiteSpinIndex(1, Up), SiteSpinIndex(4, Up)),
+        (SiteSpinIndex(1, Down), SiteSpinIndex(4, Down)),
+        (SiteSpinIndex(2, Up), SiteSpinIndex(3, Up)),
+        (SiteSpinIndex(2, Down), SiteSpinIndex(3, Down)),
+        (SiteSpinIndex(3, Up), SiteSpinIndex(4, Up)),
+        (SiteSpinIndex(3, Down), SiteSpinIndex(4, Down)),
+    ]
+    @test neighbor_pairs_with_other_labels(space) == [
+        (SiteSpinIndex(1, Up), SiteSpinIndex(2, Down)),
+        (SiteSpinIndex(1, Down), SiteSpinIndex(2, Up)),
+        (SiteSpinIndex(1, Up), SiteSpinIndex(4, Down)),
+        (SiteSpinIndex(1, Down), SiteSpinIndex(4, Up)),
+        (SiteSpinIndex(2, Up), SiteSpinIndex(3, Down)),
+        (SiteSpinIndex(2, Down), SiteSpinIndex(3, Up)),
+        (SiteSpinIndex(3, Up), SiteSpinIndex(4, Down)),
+        (SiteSpinIndex(3, Down), SiteSpinIndex(4, Up)),
+    ]
     @test dim(space) == 256
     @test local_labels(space) == ((Up,), (Down,))
     @test index_type(space) == SiteSpinIndex
@@ -74,6 +111,16 @@ function test_space_2()
         SiteSpinIndex(3, Down),
         SiteSpinIndex(4, Up),
         SiteSpinIndex(4, Down),
+    ]
+    @test indices_with_fixed_site(space, 2) == [
+        SiteSpinIndex(2, Up),
+        SiteSpinIndex(2, Down),
+    ]
+    @test indices_with_fixed_labels(space, (Up,)) == [
+        SiteSpinIndex(1, Up),
+        SiteSpinIndex(2, Up),
+        SiteSpinIndex(3, Up),
+        SiteSpinIndex(4, Up),
     ]
 end
 

@@ -16,6 +16,10 @@ function spin(id::AbstractIndex)
     throw(ArgumentError("spin function not defined for $(id)."))
 end
 
+function local_label(::AbstractIndex)
+    return ()
+end
+
 function Base.isless(id1::I, id2::I) where {I<:AbstractIndex}
     return to_tuple(id1) < to_tuple(id2)
 end
@@ -26,9 +30,5 @@ end
 end
 
 function Base.show(io::IO, spin::Spin)
-    if spin == Spin.Up
-        print(io, "↑")
-    else
-        print(io, "↓")
-    end
+    print(io, spin == Up ? "↑" : "↓")
 end

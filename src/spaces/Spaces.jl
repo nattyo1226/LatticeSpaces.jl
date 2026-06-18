@@ -2,15 +2,15 @@ module Spaces
 
 using ..Tags: AbstractSystemTag
 
-using ..Indices: AbstractIndex, site
+using ..Indices: AbstractIndex, site, local_label
 
-using ..Geometries: AbstractGeometry, nsites
-import ..Geometries: neighbors, neighbor_pairs
+using ..Geometries: AbstractGeometry
+import ..Geometries: nsites, neighbors, neighbor_pairs
 
 using ..LocalSpaces: AbstractLocalSpace
 import ..LocalSpaces: dim, local_labels, index_type, tag_type
 
 include("type.jl")
-export Space, indices
+export Space, neighbors_with_same_labels, neighbors_with_other_labels, neighbor_pairs_with_same_labels, neighbor_pairs_with_other_labels, indices, indices_with_fixed_site, indices_with_fixed_labels
 
 end
