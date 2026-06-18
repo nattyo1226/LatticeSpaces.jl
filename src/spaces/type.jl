@@ -8,7 +8,7 @@ function nsites(s::Space)
 end
 
 function nindices(s::Space)
-    return nsites(s.geometry) * dim(s.local_space)
+    return nsites(s.geometry) * nlabels(s.local_space)
 end
 
 function neighbors(s::Space{T}, id::I, shell::Int=1) where {T<:AbstractSystemTag,I<:AbstractIndex{T}}

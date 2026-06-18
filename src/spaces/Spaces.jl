@@ -7,7 +7,7 @@ using ..Indices: AbstractIndex, site, local_label
 using ..Geometries: AbstractGeometry
 import ..Geometries: nsites, neighbors, neighbor_pairs
 
-using ..LocalSpaces: AbstractLocalSpace
+using ..LocalSpaces: AbstractLocalSpace, nlabels
 import ..LocalSpaces: dim, local_labels, index_type, tag_type
 
 include("type.jl")

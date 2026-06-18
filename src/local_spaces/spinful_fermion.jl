@@ -4,6 +4,10 @@ function dim(::SpinfulFermionSpace)
     return 4
 end
 
+function nlabels(::SpinfulFermionSpace)
+    return 2
+end
+
 function local_labels(::SpinfulFermionSpace)
     return ((Up,), (Down,))
 end

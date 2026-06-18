@@ -4,6 +4,10 @@ function dim(::SpinHalfSpace)
     return 2
 end
 
+function nlabels(::SpinHalfSpace)
+    return 1
+end
+
 function local_labels(::SpinHalfSpace)
     return ((),)
 end
