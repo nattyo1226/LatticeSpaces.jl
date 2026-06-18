@@ -29,6 +29,10 @@ end
     Down
 end
 
+function string(spin::Spin)
+    return spin == Up ? "↑" : "↓"
+end
+
 function Base.show(io::IO, spin::Spin)
     print(io, spin == Up ? "↑" : "↓")
 end
