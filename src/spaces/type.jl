@@ -7,6 +7,10 @@ function nsites(s::Space)
     return nsites(s.geometry)
 end
 
+function nindices(s::Space)
+    return nsites(s.geometry) * dim(s.local_space)
+end
+
 function neighbors(s::Space{T}, id::I, shell::Int=1) where {T<:AbstractSystemTag,I<:AbstractIndex{T}}
     if I != index_type(s.local_space)
         throw(ArgumentError("Index type mismatch"))
