@@ -24,7 +24,7 @@ function Base.isless(id1::I, id2::I) where {I<:AbstractIndex}
     return to_tuple(id1) < to_tuple(id2)
 end
 
-function to_bit(id::AbstractIndex, ::Int)
+function to_bit(id::AbstractIndex)
     throw(ArgumentError("to_bit function not defined for $(id)."))
 end
 
