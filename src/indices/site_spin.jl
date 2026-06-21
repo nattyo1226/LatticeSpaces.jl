@@ -34,3 +34,7 @@ end
 function to_tuple(id::SiteSpinIndex)
     return (id.site, id.spin)
 end
+
+function to_bit(id::SiteSpinIndex)
+    return 2 * (id.site - 1) + (id.spin == Up ? 1 : 2)
+end

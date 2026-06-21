@@ -33,3 +33,7 @@ end
 function to_tuple(id::SiteIndex)
     return (id.site,)
 end
+
+function to_bit(id::SiteIndex)
+    return id.site
+end

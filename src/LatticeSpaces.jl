@@ -7,7 +7,7 @@ export SpinHalfTag, FermionTag
 
 include("indices/Indices.jl")
 using .Indices
-export AbstractIndex, has_site, site, has_spin, spin, local_label, to_tuple, Spin, Up, Down
+export AbstractIndex, has_site, site, has_spin, spin, local_label, to_tuple, to_bit, Spin, Up, Down
 export SiteIndex, SiteSpinIndex
 
 include("local_spaces/LocalSpaces.jl")

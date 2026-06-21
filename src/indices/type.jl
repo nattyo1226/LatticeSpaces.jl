@@ -1,9 +1,5 @@
 abstract type AbstractIndex{T<:AbstractSystemTag} end
 
-function to_tuple(id::AbstractIndex)
-    return throw(ArgumentError("to_tuple function not defined for $(id)."))
-end
-
 function site(id::AbstractIndex)
     throw(ArgumentError("site function not defined for $(id)."))
 end
@@ -20,8 +16,16 @@ function local_label(::AbstractIndex)
     return ()
 end
 
+function to_tuple(id::AbstractIndex)
+    return throw(ArgumentError("to_tuple function not defined for $(id)."))
+end
+
 function Base.isless(id1::I, id2::I) where {I<:AbstractIndex}
     return to_tuple(id1) < to_tuple(id2)
+end
+
+function to_bit(id::AbstractIndex)
+    throw(ArgumentError("to_bit function not defined for $(id)."))
 end
 
 @enum Spin begin

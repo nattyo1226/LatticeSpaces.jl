@@ -5,7 +5,7 @@ using ..Tags: AbstractSystemTag, SpinHalfTag, FermionTag
 using Printf
 
 include("type.jl")
-export AbstractIndex, site, has_spin, spin, local_label, to_tuple
+export AbstractIndex, site, has_spin, spin, local_label, to_tuple, to_bit
 export Spin, Up, Down
 
 include("site.jl")
