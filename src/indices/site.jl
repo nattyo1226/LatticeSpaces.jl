@@ -34,6 +34,6 @@ function to_tuple(id::SiteIndex)
     return (id.site,)
 end
 
-function to_bit(id::SiteIndex)
-    return id.site
+function to_bit(id::SiteIndex, num_bits::Int)
+    return num_bits - id.site
 end
