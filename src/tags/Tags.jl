@@ -11,7 +11,7 @@ struct SpinHalfTag <: AbstractSystemTag end
 export SpinHalfTag
 
 struct FermionTag <: AbstractSystemTag end
-function coeff_type(::Type{<:FermionTag})
+function coeff_type(::Type{FermionTag})
     return ComplexF64
 end
 export FermionTag
