@@ -3,6 +3,17 @@ struct Space{T<:AbstractSystemTag,L<:AbstractLocalSpace{T},G<:AbstractGeometry}
     geometry::G
 end
 
+function Base.show(io::IO, s::Space{T}) where T
+    print(io, "Space{T=$(T)}(local_space=$(s.local_space), geometry=$(s.geometry))")
+end
+
+function Base.show(io::IO, ::MIME"text/plain", s::Space{T}) where T
+    @printf io "[Space]:\n"
+    @printf io "system type: %s\n" string(T)
+    @printf io "local space: %s\n" string(s.local_space)
+    @printf io "geometry   : %s\n" string(s.geometry)
+end
+
 function nsites(s::Space)
     return nsites(s.geometry)
 end
