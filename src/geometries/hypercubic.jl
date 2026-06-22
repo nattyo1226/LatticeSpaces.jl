@@ -7,7 +7,7 @@ function Hypercubic(size::Int, periodic::Bool)
     return Hypercubic((size,), (periodic,))
 end
 
-function Hypercubic(size::NTuple{D,Int}, ::Type{B}) where {D,B<:AbstractBoundary{D}}
+function Hypercubic(size::NTuple{D,Int}, ::Type{B}) where {D,B<:AbstractBoundary}
     boundary = B(D)
     p = periodic(boundary)
     return Hypercubic{D}(size, p)
