@@ -1,5 +1,7 @@
 module Spaces
 
+using Printf
+
 using ..Tags: AbstractSystemTag
 
 using ..Indices: AbstractIndex, site, local_label
