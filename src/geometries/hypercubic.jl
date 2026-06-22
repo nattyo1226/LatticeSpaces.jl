@@ -3,13 +3,21 @@ struct Hypercubic{D} <: AbstractGeometry{D}
     periodic::NTuple{D,Bool}
 end
 
-function Hypercubic(size::NTuple{D,Int}, boundary::B) where {D,B<:AbstractBoundary{D}}
+function Hypercubic(size::Int, periodic::Bool)
+    return Hypercubic((size,), (periodic,))
+end
+
+function Hypercubic(size::NTuple{D,Int}, ::Type{B}) where {D,B<:AbstractBoundary{D}}
+    boundary = B(D)
     p = periodic(boundary)
     return Hypercubic{D}(size, p)
 end
 
-function Hypercubic(size::Int, periodic::Bool)
-    return Hypercubic((size,), (periodic,))
+function Hypercubic(size::Int, ::Type{B}) where {B<:AbstractBoundary}
+    D = 1
+    boundary = B(D)
+    p = periodic(boundary)
+    return Hypercubic{D}((size,), p)
 end
 
 function Base.show(io::IO, g::Hypercubic{D}) where {D}

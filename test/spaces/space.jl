@@ -41,7 +41,7 @@ end
 
 function test_space_2()
     local_space = SpinfulFermionSpace()
-    geometry = Hypercubic(4, true)
+    geometry = Hypercubic(4, PeriodicBoundary)
     space = Space(local_space, geometry)
     T = tag_type(space)
     id = SiteSpinIndex(2, Up)
