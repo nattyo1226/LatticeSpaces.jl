@@ -12,7 +12,7 @@ export SiteIndex, SiteSpinIndex
 
 include("local_spaces/LocalSpaces.jl")
 using .LocalSpaces
-export AbstractLocalSpace, dim, local_labels, index_type, tag_type
+export AbstractLocalSpace, dim, nlabels, local_labels, index_type, tag_type
 export SpinHalfSpace, SpinfulFermionSpace
 
 include("boundaries/Boundaries.jl")
@@ -25,7 +25,12 @@ using .Geometries
 export AbstractGeometry, nsites, coord, id, neighbors, neighbor_pairs
 export Hypercubic, AllToAll
 
+include("sectors/Sectors.jl")
+using .Sectors
+export AbstractSector, dim_sector
+export FullSector, ParticleNumberSector
+
 include("spaces/Spaces.jl")
 using .Spaces
-export Space, nindices, neighbors_with_same_labels, neighbors_with_other_labels, neighbor_pairs_with_same_labels, neighbor_pairs_with_other_labels, indices, indices_with_fixed_site, indices_with_fixed_labels
+export Space, dim_full, nindices, neighbors_with_same_labels, neighbors_with_other_labels, neighbor_pairs_with_same_labels, neighbor_pairs_with_other_labels, indices, indices_with_fixed_site, indices_with_fixed_labels, basis
 end

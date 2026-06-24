@@ -1,9 +1,15 @@
 function test_space_1()
     local_space = SpinHalfSpace()
     geometry = AllToAll(4)
-    space = Space(local_space, geometry)
+    sector = FullSector{SpinHalfTag}()
+    space = Space(local_space, geometry, sector)
     T = SpinHalfTag
     id = SiteIndex{T}(2)
+
+    @test local_labels(space) == ((),)
+    @test index_type(space) == SiteIndex{T}
+    @test dim_full(space) == 16
+    @test dim(space) == 16
 
     @test neighbors(space, id) == [
         SiteIndex{T}(1),
@@ -18,9 +24,6 @@ function test_space_1()
         (SiteIndex{T}(2), SiteIndex{T}(4)),
         (SiteIndex{T}(3), SiteIndex{T}(4)),
     ]
-    @test dim(space) == 16
-    @test local_labels(space) == ((),)
-    @test index_type(space) == SiteIndex{T}
 
     @test indices(space) == [
         SiteIndex{T}(1),
@@ -37,14 +40,21 @@ function test_space_1()
         SiteIndex{T}(3),
         SiteIndex{T}(4),
     ]
+
+    @test basis(space) == collect(0:15)
 end
 
 function test_space_2()
     local_space = SpinfulFermionSpace()
     geometry = Hypercubic(4, PeriodicBoundary)
-    space = Space(local_space, geometry)
-    T = tag_type(space)
+    sector = ParticleNumberSector(4)
+    space = Space(local_space, geometry, sector)
     id = SiteSpinIndex(2, Up)
+
+    @test local_labels(space) == ((Up,), (Down,))
+    @test index_type(space) == SiteSpinIndex
+    @test dim_full(space) == 256
+    @test dim(space) == 70
 
     @test neighbors(space, id) == [
         SiteSpinIndex(1, Up),
@@ -98,9 +108,6 @@ function test_space_2()
         (SiteSpinIndex(3, Up), SiteSpinIndex(4, Down)),
         (SiteSpinIndex(3, Down), SiteSpinIndex(4, Up)),
     ]
-    @test dim(space) == 256
-    @test local_labels(space) == ((Up,), (Down,))
-    @test index_type(space) == SiteSpinIndex
 
     @test indices(space) == [
         SiteSpinIndex(1, Up),
