@@ -176,6 +176,7 @@ function basis(s::Space{T,L,G,FullSector{T}}) where {T<:AbstractSystemTag,L<:Abs
 end
 
 function basis(s::Space{FermionTag,L,G,ParticleNumberSector}) where {L<:AbstractLocalSpace{FermionTag},G<:AbstractGeometry}
+    num_particles = s.sector.num_particles
     return [b for b in 0:(dim_full(s)-1) if count_ones(b) == num_particles]
 end
 
