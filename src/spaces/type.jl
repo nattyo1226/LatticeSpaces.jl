@@ -2,11 +2,10 @@ struct Space{T<:AbstractSystemTag,L<:AbstractLocalSpace{T},G<:AbstractGeometry,S
     local_space::L
     geometry::G
     sector::S
-end
 
-function Space(local_space::L, geometry::G) where {T<:AbstractSystemTag,L<:AbstractLocalSpace{T},G<:AbstractGeometry}
-    sector = FullSector{T}()
-    return Space{T,L,G,typeof(sector)}(local_space, geometry, sector)
+    function Space(local_space::L, geometry::G, sector::S=FullSector{T}()) where {T<:AbstractSystemTag,L<:AbstractLocalSpace{T},G<:AbstractGeometry,S<:AbstractSector{T}}
+        new{T,L,G,S}(local_space, geometry, sector)
+    end
 end
 
 function nsites(s::Space)
