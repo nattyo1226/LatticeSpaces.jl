@@ -1,8 +1,7 @@
 function test_space_1()
     local_space = SpinHalfSpace()
     geometry = AllToAll(4)
-    sector = FullSector{SpinHalfTag}()
-    space = Space(local_space, geometry, sector)
+    space = Space(local_space, geometry)
     T = SpinHalfTag
     id = SiteIndex{T}(2)
 
