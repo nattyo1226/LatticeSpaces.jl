@@ -15,3 +15,7 @@ end
 function index_type(::SpinHalfSpace)
     return SiteIndex{SpinHalfTag}
 end
+
+function Base.show(io::IO, ::SpinHalfSpace)
+    print(io, "SpinHalfSpace")
+end

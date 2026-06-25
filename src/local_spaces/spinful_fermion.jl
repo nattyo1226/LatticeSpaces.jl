@@ -15,3 +15,7 @@ end
 function index_type(::SpinfulFermionSpace)
     return SiteSpinIndex
 end
+
+function Base.show(io::IO, ::SpinfulFermionSpace)
+    print(io, "SpinfulFermionSpace")
+end
