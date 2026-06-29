@@ -1,11 +1,7 @@
 module Tags
 
 abstract type AbstractSystemTag end
-function coeff_type(::Type{<:AbstractSystemTag})
-    return Float64
-end
-
-export AbstractSystemTag, coeff_type
+export AbstractSystemTag
 
 struct SpinHalfTag <: AbstractSystemTag end
 export SpinHalfTag
@@ -15,9 +11,6 @@ function Base.show(io::IO, ::SpinHalfTag)
 end
 
 struct FermionTag <: AbstractSystemTag end
-function coeff_type(::Type{FermionTag})
-    return ComplexF64
-end
 export FermionTag
 
 function Base.show(io::IO, ::FermionTag)

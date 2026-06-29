@@ -2,7 +2,7 @@ module LatticeSpaces
 
 include("tags/Tags.jl")
 using .Tags
-export AbstractSystemTag, coeff_type
+export AbstractSystemTag
 export SpinHalfTag, FermionTag
 
 include("indices/Indices.jl")
