@@ -9,7 +9,7 @@ function nlabels(::SpinfulFermionSpace)
 end
 
 function local_labels(::SpinfulFermionSpace)
-    return ((Up,), (Down,))
+    return [(Up,), (Down,)]
 end
 
 function index_type(::SpinfulFermionSpace)

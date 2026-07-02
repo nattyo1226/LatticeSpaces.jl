@@ -22,6 +22,8 @@ Base.:(==)(id1::SiteIndex, id2::SiteIndex) = id1.site == id2.site
 
 Base.hash(id::SiteIndex, h::UInt) = hash(id.site, h)
 
+Base.isless(id1::SiteIndex, id2::SiteIndex) = id1.site < id2.site
+
 function has_site(::SiteIndex)
     return true
 end

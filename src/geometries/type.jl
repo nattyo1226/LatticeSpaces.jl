@@ -30,33 +30,33 @@ end
 
 function neighbors(g::AbstractGeometry{D}, id::Int, shell::Int=1) where {D}
     c = id2coord(g, id)
-    neighbor_ids = Int[]
     size_g = size(g)
+    periodic_g = periodic(g)
 
     offsets = neighbor_offsets(g, shell)
-    for offset in offsets
-        neighbor_c = ntuple(D) do i
+    neighbor_coords = Iterators.map(offsets) do offset
+        ntuple(D) do i
             val = c[i] + offset[i]
-            periodic(g)[i] ? mod1(val, size_g[i]) : val
-        end
-
-        if all(1 .<= neighbor_c .<= size_g)
-            push!(neighbor_ids, coord2id(g, neighbor_c))
+            periodic_g[i] ? mod1(val, size_g[i]) : val
         end
     end
+    valid_neighbor_coords = Iterators.filter(neighbor_coords) do neighbor_c
+        all(i -> 1 <= neighbor_c[i] <= size_g[i], 1:D)
+    end
 
-    return sort(neighbor_ids)
+    return Iterators.map(neighbor_c -> coord2id(g, neighbor_c), valid_neighbor_coords)
 end
 
 function neighbor_pairs(g::AbstractGeometry{D}, shell::Int=1) where {D}
-    pairs = Tuple{Int,Int}[]
-    for id in 1:nsites(g)
-        ns = neighbors(g, id, shell)
-        for id_n in ns
-            if id < id_n
-                push!(pairs, (id, id_n))
-            end
+    return Iterators.flatten(
+        Iterators.map(1:nsites(g)) do id
+            Iterators.map(
+                id_n -> (id, id_n),
+                Iterators.filter(
+                    id_n -> id < id_n,
+                    neighbors(g, id, shell),
+                )
+            )
         end
-    end
-    return sort(pairs)
+    )
 end

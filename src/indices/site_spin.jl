@@ -15,6 +15,10 @@ function Base.hash(id::SiteSpinIndex, h::UInt)
     return hash((id.site, id.spin), h)
 end
 
+function Base.isless(id1::SiteSpinIndex, id2::SiteSpinIndex)
+    return (id1.site < id2.site) || (id1.site == id2.site && id1.spin < id2.spin)
+end
+
 function site(id::SiteSpinIndex)
     return id.site
 end

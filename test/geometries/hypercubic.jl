@@ -2,10 +2,11 @@ function test_hypercubic_1()
     g = Hypercubic((4, 4), (true, true))
     site_id = 5
     neighbor_ids = neighbors(g, site_id)
-    @test neighbor_ids == [1, 6, 8, 9]
+    @test !(neighbor_ids isa AbstractArray)
+    @test sort(collect(neighbor_ids)) == [1, 6, 8, 9]
 
     pairs = neighbor_pairs(g)
-    @test pairs == [
+    @test sort(collect(pairs)) == [
         (1, 2), (1, 4), (1, 5), (1, 13),
         (2, 3), (2, 6), (2, 14),
         (3, 4), (3, 7), (3, 15),
@@ -28,10 +29,11 @@ function test_hypercubic_2()
     g = Hypercubic((3, 3, 3), (false, false, false))
     site_id = 13
     neighbor_ids = neighbors(g, site_id)
-    @test neighbor_ids == [4, 10, 14, 16, 22]
+    @test !(neighbor_ids isa AbstractArray)
+    @test sort(collect(neighbor_ids)) == [4, 10, 14, 16, 22]
 
-    pairs = neighbor_pairs(g)
-    @test pairs == [
+    pairs = (neighbor_pairs(g))
+    @test sort(collect(pairs)) == [
         (1, 2), (1, 4), (1, 10),
         (2, 3), (2, 5), (2, 11),
         (3, 6), (3, 12),

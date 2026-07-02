@@ -9,7 +9,7 @@ function nlabels(::SpinHalfSpace)
 end
 
 function local_labels(::SpinHalfSpace)
-    return ((),)
+    return [()]
 end
 
 function index_type(::SpinHalfSpace)

@@ -48,14 +48,15 @@ function coord2id(g::Hypercubic{D}, c::NTuple{D,Int}) where D
 end
 
 function neighbor_offsets(::Hypercubic{D}, shell::Int=1) where D
-    offsets = Vector{NTuple{D,Int}}()
     if shell == 1
-        for d in 1:D
-            push!(offsets, ntuple(i -> i == d ? 1 : 0, Val(D)))
-            push!(offsets, ntuple(i -> i == d ? -1 : 0, Val(D)))
-        end
+        return Iterators.flatten(
+            Iterators.map(1:D) do d
+                Iterators.map((1, -1)) do s
+                    ntuple(i -> i == d ? s : 0, Val(D))
+                end
+            end
+        )
     else
         throw(ArgumentError("Only nearest neighbors (shell=1) are supported for Hypercubic geometry"))
     end
-    return offsets
 end

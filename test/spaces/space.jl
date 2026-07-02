@@ -5,17 +5,17 @@ function test_space_1()
     T = SpinHalfTag
     id = SiteIndex{T}(2)
 
-    @test local_labels(space) == ((),)
+    @test local_labels(space) == [()]
     @test index_type(space) == SiteIndex{T}
     @test dim_full(space) == 16
     @test dim(space) == 16
 
-    @test neighbors(space, id) == [
+    @test sort(collect(neighbors(space, id))) == [
         SiteIndex{T}(1),
         SiteIndex{T}(3),
         SiteIndex{T}(4),
     ]
-    @test neighbor_pairs(space) == [
+    @test sort(collect(neighbor_pairs(space))) == [
         (SiteIndex{T}(1), SiteIndex{T}(2)),
         (SiteIndex{T}(1), SiteIndex{T}(3)),
         (SiteIndex{T}(1), SiteIndex{T}(4)),
@@ -24,23 +24,23 @@ function test_space_1()
         (SiteIndex{T}(3), SiteIndex{T}(4)),
     ]
 
-    @test indices(space) == [
+    @test sort(collect(indices(space))) == [
         SiteIndex{T}(1),
         SiteIndex{T}(2),
         SiteIndex{T}(3),
         SiteIndex{T}(4),
     ]
-    @test indices_with_fixed_site(space, 2) == [
+    @test sort(collect(indices_with_fixed_site(space, 2))) == [
         SiteIndex{T}(2),
     ]
-    @test indices_with_fixed_labels(space, ()) == [
+    @test sort(collect(indices_with_fixed_labels(space, ()))) == [
         SiteIndex{T}(1),
         SiteIndex{T}(2),
         SiteIndex{T}(3),
         SiteIndex{T}(4),
     ]
 
-    @test basis(space) == collect(0:15)
+    @test basis(space) == 0:15
 end
 
 function test_space_2()
@@ -50,32 +50,32 @@ function test_space_2()
     space = Space(local_space, geometry, sector)
     id = SiteSpinIndex(2, Up)
 
-    @test local_labels(space) == ((Up,), (Down,))
+    @test local_labels(space) == [(Up,), (Down,)]
     @test index_type(space) == SiteSpinIndex
     @test dim_full(space) == 256
     @test dim(space) == 70
 
-    @test neighbors(space, id) == [
+    @test sort(collect(neighbors(space, id))) == [
         SiteSpinIndex(1, Up),
         SiteSpinIndex(1, Down),
         SiteSpinIndex(3, Up),
         SiteSpinIndex(3, Down),
     ]
-    @test neighbors_with_same_labels(space, id) == [
+    @test sort(collect(neighbors_with_same_labels(space, id))) == [
         SiteSpinIndex(1, Up),
         SiteSpinIndex(3, Up),
     ]
-    @test neighbors_with_other_labels(space, id) == [
+    @test sort(collect(neighbors_with_other_labels(space, id))) == [
         SiteSpinIndex(1, Down),
         SiteSpinIndex(3, Down),
     ]
-    @test neighbor_pairs(space) == [
+    @test sort(collect(neighbor_pairs(space))) == [
         (SiteSpinIndex(1, Up), SiteSpinIndex(2, Up)),
         (SiteSpinIndex(1, Up), SiteSpinIndex(2, Down)),
-        (SiteSpinIndex(1, Down), SiteSpinIndex(2, Up)),
-        (SiteSpinIndex(1, Down), SiteSpinIndex(2, Down)),
         (SiteSpinIndex(1, Up), SiteSpinIndex(4, Up)),
         (SiteSpinIndex(1, Up), SiteSpinIndex(4, Down)),
+        (SiteSpinIndex(1, Down), SiteSpinIndex(2, Up)),
+        (SiteSpinIndex(1, Down), SiteSpinIndex(2, Down)),
         (SiteSpinIndex(1, Down), SiteSpinIndex(4, Up)),
         (SiteSpinIndex(1, Down), SiteSpinIndex(4, Down)),
         (SiteSpinIndex(2, Up), SiteSpinIndex(3, Up)),
@@ -87,20 +87,20 @@ function test_space_2()
         (SiteSpinIndex(3, Down), SiteSpinIndex(4, Up)),
         (SiteSpinIndex(3, Down), SiteSpinIndex(4, Down)),
     ]
-    @test neighbor_pairs_with_same_labels(space) == [
+    @test sort(collect(neighbor_pairs_with_same_labels(space))) == [
         (SiteSpinIndex(1, Up), SiteSpinIndex(2, Up)),
-        (SiteSpinIndex(1, Down), SiteSpinIndex(2, Down)),
         (SiteSpinIndex(1, Up), SiteSpinIndex(4, Up)),
+        (SiteSpinIndex(1, Down), SiteSpinIndex(2, Down)),
         (SiteSpinIndex(1, Down), SiteSpinIndex(4, Down)),
         (SiteSpinIndex(2, Up), SiteSpinIndex(3, Up)),
         (SiteSpinIndex(2, Down), SiteSpinIndex(3, Down)),
         (SiteSpinIndex(3, Up), SiteSpinIndex(4, Up)),
         (SiteSpinIndex(3, Down), SiteSpinIndex(4, Down)),
     ]
-    @test neighbor_pairs_with_other_labels(space) == [
+    @test sort(collect(neighbor_pairs_with_other_labels(space))) == [
         (SiteSpinIndex(1, Up), SiteSpinIndex(2, Down)),
-        (SiteSpinIndex(1, Down), SiteSpinIndex(2, Up)),
         (SiteSpinIndex(1, Up), SiteSpinIndex(4, Down)),
+        (SiteSpinIndex(1, Down), SiteSpinIndex(2, Up)),
         (SiteSpinIndex(1, Down), SiteSpinIndex(4, Up)),
         (SiteSpinIndex(2, Up), SiteSpinIndex(3, Down)),
         (SiteSpinIndex(2, Down), SiteSpinIndex(3, Up)),
@@ -108,7 +108,7 @@ function test_space_2()
         (SiteSpinIndex(3, Down), SiteSpinIndex(4, Up)),
     ]
 
-    @test indices(space) == [
+    @test sort(collect(indices(space))) == [
         SiteSpinIndex(1, Up),
         SiteSpinIndex(1, Down),
         SiteSpinIndex(2, Up),
@@ -118,18 +118,18 @@ function test_space_2()
         SiteSpinIndex(4, Up),
         SiteSpinIndex(4, Down),
     ]
-    @test indices_with_fixed_site(space, 2) == [
+    @test sort(collect(indices_with_fixed_site(space, 2))) == [
         SiteSpinIndex(2, Up),
         SiteSpinIndex(2, Down),
     ]
-    @test indices_with_fixed_labels(space, (Up,)) == [
+    @test sort(collect(indices_with_fixed_labels(space, (Up,)))) == [
         SiteSpinIndex(1, Up),
         SiteSpinIndex(2, Up),
         SiteSpinIndex(3, Up),
         SiteSpinIndex(4, Up),
     ]
 
-    @test basis(space) == [
+    @test sort(collect(basis(space))) == [
         0b00001111,
         0b00010111, 0b00011011, 0b00011101, 0b00011110,
         0b00100111, 0b00101011, 0b00101101, 0b00101110, 0b00110011, 0b00110101, 0b00110110, 0b00111001, 0b00111010, 0b00111100,

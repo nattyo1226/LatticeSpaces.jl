@@ -25,7 +25,7 @@ end
 
 function neighbors(g::AllToAll, id::Int, shell::Int=1)
     if shell == 1
-        return [j for j in 1:g.size if j != id]
+        return Iterators.filter(j -> j != id, 1:g.size)
     else
         throw(ArgumentError("Only nearest neighbors (shell=1) are supported for AllToAll geometry"))
     end
